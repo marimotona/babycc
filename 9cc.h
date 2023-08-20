@@ -14,6 +14,7 @@ typedef struct Node Node;
 typedef enum {
     TK_IDENT,
     TK_PUNCT,
+    TK_KEYWORD,
     TK_NUM,
     TK_EOF,
 } TokenKind;
@@ -56,19 +57,20 @@ struct Function {
 
 
 typedef enum {
-    ND_ADD,
-    ND_SUB,
-    ND_MUL,
-    ND_DIV,
-    ND_NEG,
-    ND_EQ,
-    ND_NE,
-    ND_LT,
-    ND_LE,
-    ND_ASSIGN,
-    ND_EXPR_STMT,
-    ND_VAR,
-    ND_NUM,
+    ND_ADD,       // +
+    ND_SUB,       // -
+    ND_MUL,       // *
+    ND_DIV,       // /
+    ND_NEG,       // unary -
+    ND_EQ,        // ==
+    ND_NE,        // !=
+    ND_LT,        // <
+    ND_LE,        // <=
+    ND_ASSIGN,    // =
+    ND_RETURN,    // "return"
+    ND_EXPR_STMT, // Expression statement
+    ND_VAR,       // Variable
+    ND_NUM,       // Integer
 } NodeKind;
 
 

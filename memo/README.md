@@ -225,3 +225,39 @@ Function型のオブジェクトとして、
 ・関数の本体
 ・ローカル変数、スタックのサイズ
 を保持したオブジェクトを作成している
+
+
+## step11
+
+#### tokenize.c
+
+##### convert_keywords関数
+```c
+static void convert_keywords(Token *tok) {
+    for (Token *t= tok; t->kind != TK_EOF; t = t->next)
+        if(equal(t, "return"))
+            t->kind = TK_KEYWORD;
+}
+```
+引数には、連結リストが渡される
+終わりまで見ていき、'return'が会った多彩には、トークンの種類を'TK_KEYWORD'にする
+
+
+#### parse.c
+
+##### stmt関数
+
+```c
+static Node *stmt(Token **rest, Token *tok) {
+    if (equal(tok, "return")) {
+      Node *node = new_unary(ND_RETURN, expr(&tok, tok->next));
+      *rest = skip(tok, ";");
+      return node;
+    }
+    return expr_stmt(rest, tok);
+}
+```
+文のNodeオブジェクトを構築する
+
+もし、return文だった場合には、new_unary関数を呼び出し、
+ND_RETURN型のNodeオブジェクトを作成する
