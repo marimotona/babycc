@@ -80,6 +80,8 @@ typedef enum {
 struct Node {
     NodeKind kind;
     Node *next;
+    Node *tok;
+    
     Node *lhs;
     Node *rhs;
 
